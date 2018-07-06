@@ -5,17 +5,16 @@ function getRandomPokemonPic() {
 }
 
 window.onload = () => {
-    document.querySelectorAll('img').forEach(img => {
-        if(img.hasAttribute('src')) {
-            img.setAttribute('src', getRandomPokemonPic());
+    chrome.storage.sync.get('isPokenificate', data => {
+        if(data.isPokenificate) {
+            document.querySelectorAll('img').forEach(img => {
+                if(img.hasAttribute('src')) {
+                    img.setAttribute('src', getRandomPokemonPic());
+                }
+                if(img.hasAttribute('srcset')) {
+                    img.setAttribute('srcset', getRandomPokemonPic());
+                }
+            });
         }
-
-        if(img.hasAttribute('srcset')) {
-            img.setAttribute('srcset', getRandomPokemonPic());
-        }
-    });
-
-    document.querySelectorAll('picture').forEach(img => {
-        img.setAttribute('src', getRandomPokemonPic());
     });
 };
