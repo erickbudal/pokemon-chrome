@@ -1,0 +1,13 @@
+{
+    "name": "Pokemon Chrome",
+    "version": "1.0",
+    "description": "Replaces all images on all pages to random Pokemon pictures.",
+    "content_scripts": [{
+        "js": ["content-script.js"],
+        "matches": [ "http://*/*", "https://*/*"]
+    }],
+    "web_accessible_resources": [
+        "images/*.png"
+    ],
+    "manifest_version": 2
+}
