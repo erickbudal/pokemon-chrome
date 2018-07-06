@@ -33,9 +33,11 @@ function replaceImagesToPokemons() {
             document.querySelectorAll('img').forEach(img => {
                 if(img.hasAttribute('src')) {
                     img.setAttribute('src', getRandomPokemonPic());
+                    img.setAttribute('alt', 'pokenificated');
                 }
                 if(img.hasAttribute('srcset') ) {
                     img.setAttribute('srcset', getRandomPokemonPic());
+                    img.setAttribute('alt', 'pokenificated');
                 }
             });
         }
@@ -44,19 +46,19 @@ function replaceImagesToPokemons() {
 
 window.onload = replaceImagesToPokemons;
 
-/* Tentando usar MutationObserver para mudar imagens carregadas após o window.onload
-   Ainda não funciona :(
 const observer = new MutationObserver(mutations => {
     chrome.storage.sync.get('isPokenificate', data => {
         if(data.isPokenificate) {
             mutations.forEach(mutation => {
                 if(mutation.target.nodeName.toLocaleLowerCase() == 'img') {
                     let img = mutation.target;
-                    if(img.hasAttribute('src')) {
+                    if(img.hasAttribute('src') && img.getAttribute('alt') != 'pokenificated') {
                         img.setAttribute('src', getRandomPokemonPic());
+                        img.setAttribute('alt', 'pokenificated');
                     }
-                    if(img.hasAttribute('srcset') ) {
+                    if(img.hasAttribute('srcset') && img.getAttribute('alt') != 'pokenificated') {
                         img.setAttribute('srcset', getRandomPokemonPic());
+                        img.setAttribute('alt', 'pokenificated');
                     }
                 }
             }); 
@@ -67,4 +69,3 @@ const observer = new MutationObserver(mutations => {
 const config = {attributes: true, childList: true, subtree: true};
 
 observer.observe(document.getElementsByTagName("body")[0], config);
-*/
